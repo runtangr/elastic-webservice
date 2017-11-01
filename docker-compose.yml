@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+
+  useraction:
+
+    networks:
+      default
+
+networks:
+  default:
+    external:
+      name: dockerelk_elk_user_action
