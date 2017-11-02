@@ -6,7 +6,7 @@ Crate on 2 Nov 2017
 
 import unittest
 from useraction import deal_status as ds
-import test_data as td
+import data_of_test as td
 
 class MyTestCase(unittest.TestCase):
 
