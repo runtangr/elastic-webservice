@@ -20,7 +20,7 @@ def analyze_es_data(es_data):
 	for hit in es_data['hits']['hits']:
 		# print(hit["_source"])
 
-		if u'rsstaus' not in hit["_source"]:
+		if u'rsstatus' not in hit["_source"]:
 			hit["_source"][u'rsstaus'] = 0
 	return es_data
 
