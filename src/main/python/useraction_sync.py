@@ -1,13 +1,12 @@
 #encoding=utf-8
+'''
+@author: tangr
+'''
 
 from elasticsearch import Elasticsearch
 from useraction import deal_es
 from useraction import deal_status
 from useraction import send_es2crm
-
-'''
-@author: tangr
-'''
 
 if __name__ == '__main__':
 	
@@ -24,5 +23,6 @@ if __name__ == '__main__':
     #设置标志位为1
 
     #更新es数据
+    deal_es.update_es_data(data=crm_datas)
 
     print(es_status_data)
