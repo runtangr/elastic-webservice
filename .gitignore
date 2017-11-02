@@ -43,3 +43,4 @@ livestatus.log
 .project
 .pydevproject
 venv
+.idea
