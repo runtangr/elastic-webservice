@@ -6,18 +6,17 @@ Crate on 2 Nov 2017
 
 import unittest
 from useraction import deal_status as ds
-import testdata as td
-import useraction_sync as us
+import test_data as td
 
 class MyTestCase(unittest.TestCase):
 
     def set_data(self):
-        us.es_status_data = td.es_data()
-        self.data = us.es_status_data
-
+        self.data = td.es_data()
+        print (self.data)
     def test_deal_status(self):
         self.set_data()
         print (ds.deal_status(self.data))
+
 
 if __name__ == '__main__':
     unittest.main()
