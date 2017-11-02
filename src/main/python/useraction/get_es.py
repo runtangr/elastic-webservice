@@ -1,4 +1,7 @@
 #encoding=utf-8
+'''
+@author: tangr
+'''
 
 from elasticsearch import Elasticsearch
 import json

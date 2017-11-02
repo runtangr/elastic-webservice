@@ -3,7 +3,9 @@
 from elasticsearch import Elasticsearch
 from useraction import get_es
 
-
+'''
+@author: tangr
+'''
 
 if __name__ == '__main__':
 	
