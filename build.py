@@ -9,7 +9,7 @@ use_plugin("python.distutils")
 use_plugin("python.pydev")
 use_plugin("python.pycharm")
 
-name = "useraction-sync"
+name = "useracton-sync"
 default_task = "publish"
 
 
