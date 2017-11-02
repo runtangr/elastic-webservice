@@ -6,10 +6,8 @@ Crate on 1 Nov 2017
 
 from elasticsearch import Elasticsearch
 import json
-import useraction_sync as us
 
 def deal_status(es_data):
-    es_data = us.es_status_data
     source_data = []
     for hit in es_data['hits']['hits']:
         datalen = len(es_data['hits']['hits'])

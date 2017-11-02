@@ -21,7 +21,7 @@ def analyze_es_data(es_data):
 		# print(hit["_source"])
 
 		if u'rsstatus' not in hit["_source"]:
-			hit["_source"][u'rsstaus'] = 0
+			hit["_source"][u'rsstatus'] = 0
 	return es_data
 
 # judge_status():
