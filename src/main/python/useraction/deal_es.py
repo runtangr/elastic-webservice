@@ -5,15 +5,28 @@
 
 from elasticsearch import Elasticsearch
 import json
+import datetime
 
-def get_es_data(es):
+date = datetime.datetime.now()
+date_str = date.strftime("%Y.%m.%d")
+index = "logstash-{0}".format()
+
+def get_es_data(es,step):
 	#index body后期优化
-	resp = es.search(index='logstash-2017.10.31',body={"query": {"match_all": {}}})
+	resp = es.search(index=index,body={"query": {"match_all": {}},"size":10,
+  "from": step,
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "asc"
+      }
+    }
+  ]})
 	return resp
 
 def init_es():
 
-	es = Elasticsearch([{'host': '10.10.1.102', 'port': 9204}])
+	es = Elasticsearch([{'host': 'localhost', 'port': 9204}])
  	return es
 
 def analyze_es_data(es_data):
@@ -26,8 +39,8 @@ def analyze_es_data(es_data):
 
 def update_es_data(data):
 	es = init_es()
-	es.update(index='logstash-2017.10.31', doc_type='news', id=hit.meta.id,
-				body={"doc": {"stanford": 1, "parsed_sents": parsed}})
+	updateBody = {}
+	es.update_by_query(index=index, body=updateBody)
 
 
 if __name__ == '__main__':
