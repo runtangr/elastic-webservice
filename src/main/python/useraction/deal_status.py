@@ -17,5 +17,12 @@ def deal_status(es_data):
             source_data.append(sourcedt)
     return source_data
 
+def up_rsstatus(es_data):
+    dtlen = len(es_data)
+    for i in range(dtlen):
+        if es_data[i]['rsstatus'] == 0:
+            es_data[i]['rsstatus'] = 1
+    return es_data
+
 if __name__ == '__main__':
 	pass
