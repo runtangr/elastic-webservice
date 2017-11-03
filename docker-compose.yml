@@ -3,7 +3,7 @@ version: '2'
 services:
 
   useraction:
-
+      command: python useraction_sync.py
     networks:
       default
 
