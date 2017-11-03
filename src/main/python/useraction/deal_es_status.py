@@ -6,8 +6,10 @@ Crate on 1 Nov 2017
 
 from elasticsearch import Elasticsearch
 import json
+from datetime import datetime
+from deal_es import init_es
 
-def deal_status(es_data):
+def deal_status_rsstatus(es_data):
     source_data = []
     for hit in es_data['hits']['hits']:
         datalen = len(es_data['hits']['hits'])
@@ -23,6 +25,21 @@ def up_rsstatus(es_data):
         if es_data[i]['rsstatus'] == 0:
             es_data[i]['rsstatus'] = 1
     return es_data
+
+def init_step():
+    es = init_es()
+    doc = {
+        "step":0,
+        "timestamp":datetime.now()
+    }
+    es_res = es.indices.create(index = "step", body = doc)
+    return es_res
+
+def get_step():
+    es = init_es()
+    res = es.search(index = 'step', body={"query": {"match_all": {}}})
+    return res
+
 
 if __name__ == '__main__':
 	pass
