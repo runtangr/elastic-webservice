@@ -5,28 +5,31 @@
 
 from elasticsearch import Elasticsearch
 from useraction import deal_es
-from useraction import deal_status
-from useraction import send_es2crm
+from useraction import deal_es_status
+from useraction import deal_es2crm
 
 if __name__ == '__main__':
 	
     es = deal_es.init_es()
-    #初始化步长
+    start_time = None
 
-    # 获取步长
-    es_step = deal_status.up_rsstatus()
     while True:
         #获取es数据
-        es_data = deal_es.get_es_data(es,step=es_step)
-        es_step += 10
+        start_date, end_date = deal_es.get_date(start_time=start_time)
+        body = deal_es.get_es_body(start_date, end_date)
+        es_data = deal_es.get_es_data(es,body=body)
 
-        #过滤数据
+        if len(es_data["hits"]["hits"])==None:
+            break
+
+        print ("es_data = {0}".format(es_data))
+
 
         #存储数据到crm
-        map(lambda crm_data:send_es2crm.send_data(crm_data),crm_datas)
+        # map(lambda crm_data:send_es2crm.send_data(crm_data),crm_datas)
 
-        #设置步长
-        es_data = deal_status.up_rsstatus(es_step)
+        start_time = 1
+
 
 
 

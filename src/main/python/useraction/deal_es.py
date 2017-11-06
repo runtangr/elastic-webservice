@@ -6,22 +6,49 @@
 from elasticsearch import Elasticsearch
 import json
 import datetime
+import time
 
 date = datetime.datetime.now()
 date_str = date.strftime("%Y.%m.%d")
-index = "logstash-{0}".format()
+index = "logstash-{0}".format(date_str)
 
-def get_es_data(es,step):
-	#index body后期优化
-	resp = es.search(index=index,body={"query": {"match_all": {}},"size":10,
-  "from": step,
-  "sort": [
-    {
-      "@timestamp": {
-        "order": "asc"
-      }
-    }
-  ]})
+def get_es_body(start_date, end_date):
+	body = {
+		"query": {
+			"range": {
+				"@timestamp": {
+					"gte": start_date,
+					"lt": end_date
+				}
+			}
+
+		},
+		"size": 5,
+		"sort": [
+			{
+				"@timestamp": {
+					"order": "asc"
+				}
+			}
+		]
+	}
+	return body
+
+def get_date(start_time=None):
+	if start_time == None:
+		start_time = datetime.datetime.now() + datetime.timedelta(hours=-12)
+		a = start_time.timetuple()
+		start_date = int(time.mktime(a)) * 1000
+	else:
+		a = start_time.timetuple()
+		start_date = int(time.mktime(a)) * 1000
+
+	end_date = int(time.time()) * 1000
+	return start_date, end_date
+
+def get_es_data(es,body):
+
+	resp = es.search(index=index,body=body)
 	return resp
 
 def init_es():
