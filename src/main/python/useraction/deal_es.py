@@ -43,8 +43,6 @@ def get_date(start_time=None):
 		a = (start_time - datetime.datetime(year=1970, month=1, day=1)).total_seconds()
 		start_date = int(a*1000)
 
-
-
 	end_date = int(time.time()) * 1000
 	return start_date, end_date
 
@@ -58,18 +56,6 @@ def init_es():
 	es = Elasticsearch([{'host': 'localhost', 'port': 9204}])
  	return es
 
-def analyze_es_data(es_data):
-	for hit in es_data['hits']['hits']:
-		# print(hit["_source"])
-
-		if u'rsstatus' not in hit["_source"]:
-			hit["_source"][u'rsstatus'] = 0
-	return es_data
-
-def update_es_data(data):
-	es = init_es()
-	updateBody = {}
-	es.update_by_query(index=index, body=updateBody)
 
 
 if __name__ == '__main__':
