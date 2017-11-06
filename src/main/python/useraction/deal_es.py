@@ -17,7 +17,7 @@ def get_es_body(start_date, end_date):
 		"query": {
 			"range": {
 				"@timestamp": {
-					"gte": start_date,
+					"gt": start_date,
 					"lt": end_date
 				}
 			}
@@ -40,8 +40,10 @@ def get_date(start_time=None):
 		a = start_time.timetuple()
 		start_date = int(time.mktime(a)) * 1000
 	else:
-		a = start_time.timetuple()
-		start_date = int(time.mktime(a)) * 1000
+		a = (start_time - datetime.datetime(year=1970, month=1, day=1)).total_seconds()
+		start_date = int(a*1000)
+
+
 
 	end_date = int(time.time()) * 1000
 	return start_date, end_date

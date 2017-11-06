@@ -16,5 +16,13 @@ def deal_es_timestamp(es_data):
     dt = datetime.strptime(datedata, "%Y-%m-%dT%H:%M:%S.%fZ")
     return dt
 
+def deal_es_data(es_data):
+    data = []
+    datalen = len(es_data['hits']['hits'])
+    for i in range(datalen):
+        data.append(es_data['hits']['hits'][i]["_source"])
+
+    return data
+
 if __name__ == '__main__':
 	pass
