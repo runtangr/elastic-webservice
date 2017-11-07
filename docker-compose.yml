@@ -3,11 +3,10 @@ version: '2'
 services:
 
   useraction:
+      build: ./
       command: python useraction_sync.py
-    networks:
-      default
 
 networks:
   default:
     external:
-      name: dockerelk_elk_user_action
+      name: useractionelk_elk_user_action
