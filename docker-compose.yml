@@ -11,4 +11,4 @@ services:
 networks:
   outside:
     external:
-      name: dockerelk_elk
+      name: useractionelk_elk_user_action
