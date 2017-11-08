@@ -11,4 +11,4 @@ services:
 networks:
   outside:
     external:
-      name: useractionelk_elk_user_action
+      name: useractionelk_elk
