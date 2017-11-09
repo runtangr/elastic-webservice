@@ -5,10 +5,9 @@ services:
   useraction:
       build: ./
       command: python useraction_sync.py
-      networks:
-        - outside
+
 
 networks:
-  outside:
+  default:
     external:
       name: useractionelk_elk

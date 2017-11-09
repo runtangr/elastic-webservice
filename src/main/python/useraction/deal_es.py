@@ -53,7 +53,7 @@ def get_es_data(es,body):
 
 def init_es():
 
-	es = Elasticsearch([{'host': 'localhost', 'port': 9204}])
+	es = Elasticsearch([{'host': 'elasticsearch', 'port': 9200}])
  	return es
 
 

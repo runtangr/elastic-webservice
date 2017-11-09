@@ -7,6 +7,7 @@ from elasticsearch import Elasticsearch
 from useraction import deal_es
 from useraction import deal_es_status
 from useraction import deal_es2crm
+import time
 
 if __name__ == '__main__':
 	
